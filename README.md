@@ -24,5 +24,5 @@ Zhou Hangqing, zhouhangqing@gmail.com
 
 ## License
 
-TZToolKit is available under the MIT license. See the LICENSE file for more info.
+TZToolKit is available under the WTFPL license. See the LICENSE file for more info.
 
