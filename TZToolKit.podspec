@@ -9,20 +9,17 @@
 
 Pod::Spec.new do |s|
   s.name             = "TZToolKit"
-  s.version          = "0.1.0"
-  s.summary          = "A short description of TZToolKit."
+  s.version          = "0.0.1"
+  s.summary          = "TZToolKit"
   s.description      = <<-DESC
-                       An optional longer description of TZToolKit
-
-                       * Markdown format.
-                       * Don't worry about the indent, we strip it!
+                       A collection of convenient code for Cocoa.
                        DESC
-  s.homepage         = "https://github.com/<GITHUB_USERNAME>/TZToolKit"
-  # s.screenshots     = "www.example.com/screenshots_1", "www.example.com/screenshots_2"
-  s.license          = 'MIT'
+  s.homepage         = "https://github.com/hysteria/TZToolKit"
+  # s.screenshots     = ""
+  s.license          = 'WTFPL'
   s.author           = { "Zhou Hangqing" => "zhouhangqing@gmail.com" }
-  s.source           = { :git => "https://github.com/<GITHUB_USERNAME>/TZToolKit.git", :tag => s.version.to_s }
-  # s.social_media_url = 'https://twitter.com/<TWITTER_USERNAME>'
+  s.source           = { :git => "https://github.com/hysteria/TZToolKit.git", :tag => s.version.to_s }
+  # s.social_media_url = 'https://twitter.com/zhoutuizhi'
 
   s.platform     = :ios, '7.0'
   s.requires_arc = true
