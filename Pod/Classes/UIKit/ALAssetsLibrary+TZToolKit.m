@@ -10,17 +10,18 @@
 
 @implementation ALAssetsLibrary(TZToolKit)
 
-- (void)saveAsset:(id)asset toAlbum:(NSString *)albumName withCompletionBlock:(SaveImageCompletion)completionBlock
+- (void)saveAssetAtPath:(NSURL *)assetAtPath toAlbum:(NSString *)albumName withCompletionBlock:(CompletionBlock)completionBlock
 {
-    NSAssert([asset isKindOfClass:[UIImage class]] || [asset isKindOfClass:[NSURL class]], @"asset must be UIImage or URL of video");
-    if ([asset isKindOfClass:[UIImage class]]) {
-        [self saveImage:asset toAlbum:albumName withCompletionBlock:completionBlock];
+    NSString *path = assetAtPath.absoluteString;
+    if ([path hasSuffix:@"png"] || [path hasSuffix:@"jpg"] || [path hasSuffix:@"jpeg"]) {
+        UIImage *image = [UIImage imageWithContentsOfFile:path];
+        [self saveImage:image toAlbum:albumName withCompletionBlock:completionBlock];
     } else {
-        [self saveVideoAtPath:asset toAlbum:albumName withCompletionBlock:completionBlock];
+        [self saveVideoAtPath:assetAtPath toAlbum:albumName withCompletionBlock:completionBlock];
     }
 }
 
-- (void)saveImage:(UIImage *)image toAlbum:(NSString *)albumName withCompletionBlock:(SaveImageCompletion)completionBlock
+- (void)saveImage:(UIImage *)image toAlbum:(NSString *)albumName withCompletionBlock:(CompletionBlock)completionBlock
 {
     //write the image data to the assets library (camera roll)
     [self writeImageToSavedPhotosAlbum:image.CGImage orientation:(ALAssetOrientation)image.imageOrientation completionBlock:^(NSURL* assetURL, NSError* error) {
@@ -35,7 +36,7 @@
     }];
 }
 
-- (void)saveVideoAtPath:(NSURL *)videoAtPath toAlbum:(NSString *)albumName withCompletionBlock:(SaveImageCompletion)completionBlock
+- (void)saveVideoAtPath:(NSURL *)videoAtPath toAlbum:(NSString *)albumName withCompletionBlock:(CompletionBlock)completionBlock
 {
     if (![self videoAtPathIsCompatibleWithSavedPhotosAlbum:videoAtPath]) {
         NSLog(@"video at path %@ is not compatible", videoAtPath);
@@ -54,7 +55,7 @@
     }];
 }
 
-- (void)addAssetURL:(NSURL *)assetURL toAlbum:(NSString *)albumName withCompletionBlock:(SaveImageCompletion)completionBlock
+- (void)addAssetURL:(NSURL *)assetURL toAlbum:(NSString *)albumName withCompletionBlock:(CompletionBlock)completionBlock
 {
     //search all photo albums in the library
     [self enumerateGroupsWithTypes:ALAssetsGroupAlbum usingBlock:^(ALAssetsGroup *group, BOOL *stop) {

@@ -9,14 +9,14 @@
 #import <UIKit/UIKit.h>
 #import <AssetsLibrary/AssetsLibrary.h>
 
-typedef void(^SaveImageCompletion)(NSError* error);
+typedef void(^CompletionBlock)(NSError* error);
 
 @interface ALAssetsLibrary(TZToolKit)
 
-- (void)saveAsset:(id)asset toAlbum:(NSString *)albumName withCompletionBlock:(SaveImageCompletion)completionBlock;
-- (void)saveImage:(UIImage *)image toAlbum:(NSString *)albumName withCompletionBlock:(SaveImageCompletion)completionBlock;
-- (void)saveVideoAtPath:(NSURL *)videoAtPath toAlbum:(NSString *)albumName withCompletionBlock:(SaveImageCompletion)completionBlock;
+- (void)saveAssetAtPath:(NSURL *)assetAtPath toAlbum:(NSString *)albumName withCompletionBlock:(CompletionBlock)completionBlock;
+- (void)saveImage:(UIImage *)image toAlbum:(NSString *)albumName withCompletionBlock:(CompletionBlock)completionBlock;
+- (void)saveVideoAtPath:(NSURL *)videoAtPath toAlbum:(NSString *)albumName withCompletionBlock:(CompletionBlock)completionBlock;
 
-- (void)addAssetURL:(NSURL *)assetURL toAlbum:(NSString *)albumName withCompletionBlock:(SaveImageCompletion)completionBlock;
+- (void)addAssetURL:(NSURL *)assetURL toAlbum:(NSString *)albumName withCompletionBlock:(CompletionBlock)completionBlock;
 
 @end
