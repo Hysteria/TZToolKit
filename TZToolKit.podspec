@@ -9,7 +9,7 @@
 
 Pod::Spec.new do |s|
   s.name             = "TZToolKit"
-  s.version          = "0.0.2"
+  s.version          = "0.0.3"
   s.summary          = "TZToolKit"
   s.description      = <<-DESC
                        A collection of convenient code for Cocoa.
@@ -30,6 +30,6 @@ Pod::Spec.new do |s|
   }
 
   # s.public_header_files = 'Pod/Classes/**/*.h'
-  # s.frameworks = 'UIKit', 'MapKit'
+  s.frameworks = 'AssetsLibrary', 'UIKIt'
   # s.dependency 'AFNetworking', '~> 2.3'
 end
