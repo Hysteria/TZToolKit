@@ -143,6 +143,7 @@ typedef void(^VoidBlock) ();
 - (void)tz_removeFromSuperview
 {
     if (self.presentationStyle == TZPresentationNone) {
+        [self tz_removeFromSuperview];
         return;
     }
     
