@@ -46,5 +46,37 @@ static inline NSString *tz_APPDisplayName()
     return APPName;
 }
 
+#pragma mark - Helpers
+
+static inline UIImage *tz_dimBackgroundImage(CGSize size)
+{
+    static UIImage *dimBackgroundImage = nil;
+    if (!dimBackgroundImage) {
+        UIGraphicsBeginImageContext(size);
+        CGContextRef context = UIGraphicsGetCurrentContext();
+        //    UIGraphicsPushContext(context);
+        
+        //Gradient colours
+        size_t gradLocationsNum = 2;
+        CGFloat gradLocations[2] = {0.0f, 1.0f};
+        CGFloat gradColors[8] = {0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.75f};
+        CGColorSpaceRef colorSpace = CGColorSpaceCreateDeviceRGB();
+        CGGradientRef gradient = CGGradientCreateWithColorComponents(colorSpace, gradColors, gradLocations, gradLocationsNum);
+        CGColorSpaceRelease(colorSpace);
+        //Gradient center
+        CGPoint gradCenter = CGPointMake(size.width * 0.5, size.height * 0.5);
+        //Gradient radius
+        float gradRadius = MIN(size.width, size.height) ;
+        //Gradient draw
+        CGContextDrawRadialGradient(context, gradient, gradCenter, 0, gradCenter, gradRadius, kCGGradientDrawsAfterEndLocation);
+        CGGradientRelease(gradient);
+        
+        CGContextFillPath(context);
+        
+        dimBackgroundImage = UIGraphicsGetImageFromCurrentImageContext();
+    }
+    return dimBackgroundImage;
+}
+
 
 #endif

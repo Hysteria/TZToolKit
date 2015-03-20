@@ -18,7 +18,11 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-	// Do any additional setup after loading the view, typically from a nib.
+    
+    UIImage *dimBackgroundImage = tz_dimBackgroundImage(self.view.bounds.size);
+    UIImageView *iv = [[UIImageView alloc] initWithImage:dimBackgroundImage];
+    [self.view addSubview:iv];
+    
     [self setUpLabelsWithTransform];
     [self setUpButtons];
 }
