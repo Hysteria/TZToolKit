@@ -68,8 +68,8 @@ typedef NS_ENUM(NSInteger, TZDirection) {
 @property (nonatomic, assign) CGFloat boundsWidth;
 @property (nonatomic, assign) CGFloat boundsHeight;
 
-@property (nonatomic, weak) UIView *lastSubviewOnX;
-@property (nonatomic, weak) UIView *lastSubviewOnY;
-
+- (UIView *)lastSubviewOnX;
+- (UIView *)lastSubviewOnY;
 - (void)centerToParent;
+
 @end
