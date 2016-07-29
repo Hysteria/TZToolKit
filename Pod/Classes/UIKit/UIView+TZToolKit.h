@@ -48,3 +48,28 @@ typedef NS_ENUM(NSInteger, TZDirection) {
 @property (nonatomic, assign) TZPresentationStyle presentationStyle;
 
 @end
+
+@interface UIView (Position)
+
+@property (nonatomic, assign) CGFloat x;
+@property (nonatomic, assign) CGFloat y;
+@property (nonatomic, assign) CGFloat width;
+@property (nonatomic, assign) CGFloat height;
+@property (nonatomic, assign) CGPoint origin;
+@property (nonatomic, assign) CGSize size;
+@property (nonatomic, assign) CGFloat left;
+@property (nonatomic, assign) CGFloat top;
+@property (nonatomic, assign) CGFloat bottom;
+@property (nonatomic, assign) CGFloat right;
+@property (nonatomic, assign) CGFloat centerX;
+@property (nonatomic, assign) CGFloat centerY;
+@property (nonatomic, assign) CGFloat boundsX;
+@property (nonatomic, assign) CGFloat boundsY;
+@property (nonatomic, assign) CGFloat boundsWidth;
+@property (nonatomic, assign) CGFloat boundsHeight;
+
+@property (nonatomic, weak) UIView *lastSubviewOnX;
+@property (nonatomic, weak) UIView *lastSubviewOnY;
+
+- (void)centerToParent;
+@end

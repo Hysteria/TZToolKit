@@ -1,14 +1,9 @@
 source 'https://github.com/CocoaPods/Specs.git'
 
-target 'TZToolKit', :exclusive => true do
+target 'TZToolKit' do
   pod "TZToolKit", :path => "../"
 end
 
-target 'Tests', :exclusive => true do
+target 'Tests' do
   pod "TZToolKit", :path => "../"
-
-  pod 'Specta'
-  pod 'Expecta'
-  pod 'FBSnapshotTestCase'
-  pod 'Expecta+Snapshots'
 end

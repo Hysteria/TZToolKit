@@ -9,7 +9,7 @@
 
 Pod::Spec.new do |s|
   s.name             = "TZToolKit"
-  s.version          = "0.0.1"
+  s.version          = "0.0.5"
   s.summary          = "TZToolKit"
   s.description      = <<-DESC
                        A collection of convenient code for Cocoa.

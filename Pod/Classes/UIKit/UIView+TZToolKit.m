@@ -415,6 +415,233 @@ typedef void(^VoidBlock) ();
     return CGPointZero;
 }
 
+@end
+
+inline static CGFloat _pixelIntegral(CGFloat pointValue)
+{
+    CGFloat scale = [UIScreen mainScreen].scale;
+    return (round(pointValue * scale) / scale);
+}
+
+@implementation UIView (Position)
+
+- (CGFloat)x
+{
+    return self.frame.origin.x;
+}
+
+- (void)setX:(CGFloat)x
+{
+    self.frame = CGRectMake(_pixelIntegral(x), self.y, self.width, self.height);
+}
+
+- (CGFloat)y
+{
+    return self.frame.origin.y;
+}
+
+- (void)setY:(CGFloat)y
+{
+    self.frame = CGRectMake(self.x, _pixelIntegral(y), self.width, self.height);
+}
+
+- (CGFloat)width
+{
+    return self.frame.size.width;
+}
+
+- (void)setWidth:(CGFloat)width
+{
+    self.frame = CGRectMake(self.x, self.y, _pixelIntegral(width), self.height);
+}
+
+- (CGFloat)height
+{
+    return self.frame.size.height;
+}
+
+- (void)setHeight:(CGFloat)height
+{
+    self.frame = CGRectMake(self.x, self.y, self.width, _pixelIntegral(height));
+}
+
+- (CGPoint)origin
+{
+    return CGPointMake(self.x, self.y);
+}
+
+- (void)setOrigin:(CGPoint)origin
+{
+    self.x = origin.x;
+    self.y = origin.y;
+}
+
+- (CGSize)size
+{
+    return CGSizeMake(self.width, self.height);
+}
+
+- (void)setSize:(CGSize)size
+{
+    self.width = size.width;
+    self.height = size.height;
+}
+
+- (CGFloat)right
+{
+    return self.frame.origin.x + self.frame.size.width;
+}
+
+- (void)setRight:(CGFloat)right
+{
+    self.x = right - self.width;
+}
+
+- (CGFloat)bottom
+{
+    return self.frame.origin.y + self.frame.size.height;
+}
+
+- (void)setBottom:(CGFloat)bottom
+{
+    self.y = bottom - self.height;
+}
+
+- (CGFloat)left
+{
+    return self.x;
+}
+
+- (void)setLeft:(CGFloat)left
+{
+    self.x = left;
+}
+
+- (CGFloat)top
+{
+    return self.y;
+}
+
+- (void)setTop:(CGFloat)top
+{
+    self.y = top;
+}
+
+- (CGFloat)centerX
+{
+    return self.center.x;
+}
+
+- (void)setCenterX:(CGFloat)centerX
+{
+    self.center = CGPointMake(_pixelIntegral(centerX), self.center.y);
+}
+
+- (CGFloat)centerY
+{
+    return self.center.y;
+}
+
+- (void)setCenterY:(CGFloat)centerY
+{
+    self.center = CGPointMake(self.center.x, _pixelIntegral(centerY));
+}
+
+- (CGFloat)boundsX
+{
+    return self.bounds.origin.x;
+}
+
+- (void)setBoundsX:(CGFloat)boundsX
+{
+    self.bounds = CGRectMake(_pixelIntegral(boundsX), self.boundsY, self.boundsWidth, self.boundsHeight);
+}
+
+- (CGFloat)boundsY
+{
+    return self.bounds.origin.y;
+}
+
+- (void)setBoundsY:(CGFloat)boundsY
+{
+    self.bounds = CGRectMake(self.boundsX, _pixelIntegral(boundsY), self.boundsWidth, self.boundsHeight);
+}
+
+- (CGFloat)boundsWidth
+{
+    return self.bounds.size.width;
+}
+
+
+- (void)setBoundsWidth:(CGFloat)boundsWidth
+{
+    self.bounds = CGRectMake(self.boundsX, self.boundsY, _pixelIntegral(boundsWidth), self.boundsHeight);
+}
+
+- (CGFloat)boundsHeight
+{
+    return self.bounds.size.height;
+}
+
+- (void)setBoundsHeight:(CGFloat)boundsHeight
+{
+    self.bounds = CGRectMake(self.boundsX, self.boundsY, self.boundsWidth, _pixelIntegral(boundsHeight));
+}
+
+
+- (UIView *)lastSubviewOnX
+{
+    if (self.subviews.count > 0) {
+        UIView *outView = self.subviews[0];
+        
+        for (UIView *v in self.subviews) {
+            if (v.x > outView.x) {
+                outView = v;
+            }
+        }
+        
+        return outView;
+    }
+    
+    return nil;
+}
+
+- (UIView *)lastSubviewOnY
+{
+    if (self.subviews.count > 0) {
+        UIView *outView = self.subviews[0];
+        
+        for (UIView *v in self.subviews) {
+            if (v.y > outView.y) {
+                outView = v;
+            }
+        }
+    
+        return outView;
+    }
+    
+    return nil;
+}
+
+- (void)centerToParent
+{
+    if (self.superview != nil) {
+        switch ([UIApplication sharedApplication].statusBarOrientation) {
+            case UIInterfaceOrientationPortrait:
+            case UIInterfaceOrientationPortraitUpsideDown:
+                self.origin = CGPointMake((self.superview.width / 2) - (self.width / 2),
+                                          (self.superview.height / 2) - (self.height / 2));
+                break;
+            case UIInterfaceOrientationLandscapeLeft:
+            case UIInterfaceOrientationLandscapeRight:
+                self.origin = CGPointMake((self.superview.height / 2) - (self.width / 2),
+                                          (self.superview.width / 2) - (self.height / 2));
+                break;
+            default:
+                break;
+        }
+    }
+}
 
 @end
 
